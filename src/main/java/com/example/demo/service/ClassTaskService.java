@@ -41,8 +41,11 @@ public class ClassTaskService {
     private Integer teacherId;
     private Integer classroomId;
     private String time;
+    //学科循环次数
+    private Integer i = 0;
 
     public void createByMajor(Integer majorId){
+        classTaskDao.deleteByMajorId(majorId);
         this.majorId = majorId;
         Random random = new Random();
         Subject subject = new Subject();
@@ -52,32 +55,50 @@ public class ClassTaskService {
             Integer subjectTime = subjectVO.getTime();
             this.subjectId = subjectVO.getId();
             Integer subjectType = subjectVO.getIsMajor();
-            Teacher teacher = new Teacher();
-            teacher.setSubjectId(subjectId);
-            List<TeacherVO> listTeacher = teacherDao.queryAll(teacher);
-            Integer i = random.nextInt(listTeacher.size());
-            TeacherVO teacherVO = listTeacher.get(i);
+            TeacherVO teacherVO = this.findTeacherBySubjectId(subjectId);
             this.teacherId = teacherVO.getId();
-            while (true){
-                ClassroomVO classroomVO = this.findClassroom(subjectType);
-                String time = this.getRandomTime();
-                Integer classroomId = classroomVO.getId();
-                Integer classroomType = classroomVO.getType();
-                int num = this.checkIfEmpty(time, classroomId, classroomType);
-                if (num == 0){
-                    this.classroomId = classroomId;
-                    this.time = time;
-                    break;
-                }
+            for (int i=0; i < subjectTime; i++){
+                this.makeSureClassRoom(subjectType);
             }
-            this.classTask.setMajorId(this.majorId);
-            this.classTask.setSubjectId(this.subjectId);
-            this.classTask.setClassroomId(this.classroomId);
-            this.classTask.setTime(this.time);
-            classTaskDao.insert(this.classTask);
         }
-        classTaskDao.deleteByMajorId(majorId);
     }
+
+    //输入subjectType(0非专业课，大教室，1专业课，小教室)
+    // 摇色子确定classroomId和time,并insert classTask
+    private void makeSureClassRoom(Integer subjectType){
+        while (true){
+            ClassroomVO classroomVO = this.findClassroom(subjectType);
+            String time = this.getRandomTime();
+            Integer classroomId = classroomVO.getId();
+            Integer classroomType = classroomVO.getType();
+            int num = this.checkIfEmpty(time, classroomId, classroomType);
+            if (num == 0){
+                this.classroomId = classroomId;
+                this.time = time;
+                break;
+            }
+        }
+        this.classTask.setMajorId(this.majorId);
+        this.classTask.setSubjectId(this.subjectId);
+        this.classTask.setTeacherId(this.teacherId);
+        this.classTask.setClassroomId(this.classroomId);
+        this.classTask.setTime(this.time);
+        classTaskDao.insert(this.classTask);
+    }
+
+
+    //输入subjectId 随即返回此学科老师
+    private TeacherVO findTeacherBySubjectId(Integer subjectId){
+        Random random = new Random();
+        Teacher teacher = new Teacher();
+        teacher.setSubjectId(subjectId);
+        List<TeacherVO> listTeacher = teacherDao.queryAll(teacher);
+        Integer i = random.nextInt(listTeacher.size());
+        TeacherVO teacherVO = listTeacher.get(i);
+        return teacherVO;
+    }
+
+
 
     //输入科目类型，获得随机一个大教室或者小教室
     private ClassroomVO findClassroom(Integer subjectType){

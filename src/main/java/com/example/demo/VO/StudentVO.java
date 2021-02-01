@@ -17,6 +17,8 @@ public class StudentVO implements Serializable {
 
     private Integer majorId;
 
+    private String password;
+
 
     public Integer getId() {
         return id;
@@ -42,4 +44,11 @@ public class StudentVO implements Serializable {
         this.majorId = majorId;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

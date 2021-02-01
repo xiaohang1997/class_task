@@ -17,6 +17,8 @@ public class TeacherVO implements Serializable {
 
     private Integer subjectId;
 
+    private String password;
+
 
     public Integer getId() {
         return id;
@@ -42,4 +44,11 @@ public class TeacherVO implements Serializable {
         this.subjectId = subjectId;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

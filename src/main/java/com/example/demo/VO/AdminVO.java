@@ -15,6 +15,8 @@ public class AdminVO implements Serializable {
 
     private String name;
 
+    private String password;
+
 
     public Integer getId() {
         return id;

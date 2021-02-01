@@ -17,6 +17,8 @@ public class Teacher implements Serializable {
 
     private Integer subjectId;
 
+    private String password;
+
 
     public Integer getId() {
         return id;
@@ -40,5 +42,13 @@ public class Teacher implements Serializable {
 
     public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

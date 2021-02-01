@@ -17,6 +17,8 @@ public class Student implements Serializable {
 
     private Major major;
 
+    private String password;
+
 
     public Integer getId() {
         return id;
@@ -40,5 +42,13 @@ public class Student implements Serializable {
 
     public void setMajor(Major major) {
         this.major = major;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
