@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.VO.AdminVO;
 import com.example.demo.entity.Admin;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * (Admin)表数据库访问层
  *
  * @author makejava
- * @since 2021-02-01 10:24:39
+ * @since 2021-02-01 15:06:12
  */
 public interface AdminDao {
 
@@ -19,7 +20,7 @@ public interface AdminDao {
      * @param id 主键
      * @return 实例对象
      */
-    Admin queryById(Integer id);
+    AdminVO queryById(Integer id);
 
     /**
      * 查询指定行数据
@@ -28,7 +29,7 @@ public interface AdminDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Admin> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<AdminVO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -37,7 +38,7 @@ public interface AdminDao {
      * @param admin 实例对象
      * @return 对象列表
      */
-    List<Admin> queryAll(Admin admin);
+    List<AdminVO> queryAll(Admin admin);
 
     /**
      * 新增数据

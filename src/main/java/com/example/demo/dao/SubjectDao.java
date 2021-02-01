@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.VO.SubjectVO;
 import com.example.demo.entity.Subject;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * (Subject)表数据库访问层
  *
  * @author makejava
- * @since 2021-02-01 10:59:04
+ * @since 2021-02-01 15:06:25
  */
 public interface SubjectDao {
 
@@ -19,7 +20,7 @@ public interface SubjectDao {
      * @param id 主键
      * @return 实例对象
      */
-    Subject queryById(Integer id);
+    SubjectVO queryById(Integer id);
 
     /**
      * 查询指定行数据
@@ -28,7 +29,7 @@ public interface SubjectDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Subject> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<SubjectVO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -37,7 +38,7 @@ public interface SubjectDao {
      * @param subject 实例对象
      * @return 对象列表
      */
-    List<Subject> queryAll(Subject subject);
+    List<SubjectVO> queryAll(Subject subject);
 
     /**
      * 新增数据

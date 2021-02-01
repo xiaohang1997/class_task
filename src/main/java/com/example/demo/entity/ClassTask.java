@@ -6,20 +6,20 @@ import java.io.Serializable;
  * (ClassTask)实体类
  *
  * @author makejava
- * @since 2021-02-01 10:58:59
+ * @since 2021-02-01 15:06:17
  */
 public class ClassTask implements Serializable {
-    private static final long serialVersionUID = -68609230970272857L;
+    private static final long serialVersionUID = 458573854512644819L;
 
     private Integer id;
 
-    private Major major;
+    private Integer majorId;
 
-    private Subject subject;
+    private Integer subjectId;
 
-    private Teacher teacher;
+    private Integer teacherId;
 
-    private Classroom classroom;
+    private Integer classroomId;
 
     private String time;
 
@@ -32,36 +32,36 @@ public class ClassTask implements Serializable {
         this.id = id;
     }
 
-    public Major getMajor() {
-        return major;
+    public Integer getMajorId() {
+        return majorId;
     }
 
-    public void setMajor(Major major) {
-        this.major = major;
+    public void setMajorId(Integer majorId) {
+        this.majorId = majorId;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public Integer getSubjectId() {
+        return subjectId;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public Integer getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public Classroom getClassroom() {
-        return classroom;
+    public Integer getClassroomId() {
+        return classroomId;
     }
 
-    public void setClassroom(Classroom classroom) {
-        this.classroom = classroom;
+    public void setClassroomId(Integer classroomId) {
+        this.classroomId = classroomId;
     }
 
     public String getTime() {
@@ -71,4 +71,5 @@ public class ClassTask implements Serializable {
     public void setTime(String time) {
         this.time = time;
     }
+
 }

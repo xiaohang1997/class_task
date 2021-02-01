@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.ClassTask;
 import com.example.demo.service.ClassTaskService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ import javax.annotation.Resource;
  * (ClassTask)表控制层
  *
  * @author makejava
- * @since 2021-02-01 10:59:01
+ * @since 2021-02-01 15:06:18
  */
 @RestController
 @RequestMapping("classTask")
@@ -23,15 +24,8 @@ public class ClassTaskController {
     @Resource
     private ClassTaskService classTaskService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public ClassTask selectOne(Integer id) {
-        return this.classTaskService.queryById(id);
+    public void createByMajor(Integer majorId){
+        classTaskService.createByMajor(majorId);
     }
 
 }

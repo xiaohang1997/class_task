@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.VO.ClassroomVO;
 import com.example.demo.entity.Classroom;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * (Classroom)表数据库访问层
  *
  * @author makejava
- * @since 2021-02-01 10:59:01
+ * @since 2021-02-01 15:06:19
  */
 public interface ClassroomDao {
 
@@ -19,7 +20,7 @@ public interface ClassroomDao {
      * @param id 主键
      * @return 实例对象
      */
-    Classroom queryById(Integer id);
+    ClassroomVO queryById(Integer id);
 
     /**
      * 查询指定行数据
@@ -28,7 +29,7 @@ public interface ClassroomDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Classroom> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<ClassroomVO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -37,7 +38,7 @@ public interface ClassroomDao {
      * @param classroom 实例对象
      * @return 对象列表
      */
-    List<Classroom> queryAll(Classroom classroom);
+    List<ClassroomVO> queryAll(Classroom classroom);
 
     /**
      * 新增数据

@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * (Subject)表控制层
  *
  * @author makejava
- * @since 2021-02-01 10:59:04
+ * @since 2021-02-01 15:06:25
  */
 @RestController
 @RequestMapping("subject")
@@ -23,15 +23,6 @@ public class SubjectController {
     @Resource
     private SubjectService subjectService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public Subject selectOne(Integer id) {
-        return this.subjectService.queryById(id);
-    }
+
 
 }

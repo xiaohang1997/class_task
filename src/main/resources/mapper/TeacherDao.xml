@@ -5,11 +5,7 @@
     <resultMap type="com.example.demo.entity.Teacher" id="TeacherMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
-<!--        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>-->
-        <association property="subject"
-                     column="subject_id"
-                     select="com.example.demo.dao.SubjectDao.queryById">
-        </association>
+        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->

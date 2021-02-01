@@ -7,10 +7,10 @@ import java.util.Date;
  * (Subject)实体类
  *
  * @author makejava
- * @since 2021-02-01 10:59:04
+ * @since 2021-02-01 15:06:24
  */
 public class Subject implements Serializable {
-    private static final long serialVersionUID = 985353138219334768L;
+    private static final long serialVersionUID = -20518662757620538L;
 
     private Integer id;
 
@@ -18,9 +18,9 @@ public class Subject implements Serializable {
 
     private Integer isMajor;
 
-    private Major major;
+    private Integer majorId;
 
-    private String time;
+    private Integer time;
 
 
     public Integer getId() {
@@ -47,19 +47,19 @@ public class Subject implements Serializable {
         this.isMajor = isMajor;
     }
 
-    public Major getMajor() {
-        return major;
+    public Integer getMajorId() {
+        return majorId;
     }
 
-    public void setMajor(Major major) {
-        this.major = major;
+    public void setMajorId(Integer majorId) {
+        this.majorId = majorId;
     }
 
-    public String getTime() {
+    public Integer getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 }

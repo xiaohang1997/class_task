@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.VO.MajorVO;
 import com.example.demo.entity.Major;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * (Major)表数据库访问层
  *
  * @author makejava
- * @since 2021-02-01 10:59:02
+ * @since 2021-02-01 15:06:21
  */
 public interface MajorDao {
 
@@ -19,7 +20,7 @@ public interface MajorDao {
      * @param id 主键
      * @return 实例对象
      */
-    Major queryById(Integer id);
+    MajorVO queryById(Integer id);
 
     /**
      * 查询指定行数据
@@ -28,7 +29,7 @@ public interface MajorDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Major> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<MajorVO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -37,7 +38,7 @@ public interface MajorDao {
      * @param major 实例对象
      * @return 对象列表
      */
-    List<Major> queryAll(Major major);
+    List<MajorVO> queryAll(Major major);
 
     /**
      * 新增数据

@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.VO.ClassTaskVO;
 import com.example.demo.entity.ClassTask;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * (ClassTask)表数据库访问层
  *
  * @author makejava
- * @since 2021-02-01 10:58:59
+ * @since 2021-02-01 15:06:17
  */
 public interface ClassTaskDao {
 
@@ -19,7 +20,7 @@ public interface ClassTaskDao {
      * @param id 主键
      * @return 实例对象
      */
-    ClassTask queryById(Integer id);
+    ClassTaskVO queryById(Integer id);
 
     /**
      * 查询指定行数据
@@ -28,7 +29,7 @@ public interface ClassTaskDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<ClassTask> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<ClassTaskVO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -37,7 +38,7 @@ public interface ClassTaskDao {
      * @param classTask 实例对象
      * @return 对象列表
      */
-    List<ClassTask> queryAll(ClassTask classTask);
+    List<ClassTaskVO> queryAll(ClassTask classTask);
 
     /**
      * 新增数据
@@ -74,9 +75,9 @@ public interface ClassTaskDao {
     /**
      * 通过主键删除数据
      *
-     * @param id 主键
+     * @param  majorId
      * @return 影响行数
      */
-    int deleteById(Integer id);
+    int deleteByMajorId(Integer majorId);
 
 }

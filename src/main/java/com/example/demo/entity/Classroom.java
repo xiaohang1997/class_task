@@ -6,10 +6,10 @@ import java.io.Serializable;
  * (Classroom)实体类
  *
  * @author makejava
- * @since 2021-02-01 10:59:01
+ * @since 2021-02-01 15:06:19
  */
 public class Classroom implements Serializable {
-    private static final long serialVersionUID = -19391273784284820L;
+    private static final long serialVersionUID = -42779688183565114L;
 
     private Integer id;
 
@@ -18,6 +18,8 @@ public class Classroom implements Serializable {
     private String location;
 
     private String state;
+
+    private Integer type;
 
 
     public Integer getId() {
@@ -52,4 +54,11 @@ public class Classroom implements Serializable {
         this.state = state;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 }

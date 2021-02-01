@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * (Major)表控制层
  *
  * @author makejava
- * @since 2021-02-01 10:59:02
+ * @since 2021-02-01 15:06:22
  */
 @RestController
 @RequestMapping("major")
@@ -23,15 +23,6 @@ public class MajorController {
     @Resource
     private MajorService majorService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public Major selectOne(Integer id) {
-        return this.majorService.queryById(id);
-    }
+
 
 }

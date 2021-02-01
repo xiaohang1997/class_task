@@ -1,6 +1,8 @@
 package com.example.demo.dto;
 
+
 import java.io.Serializable;
+
 
 public class ResponseResult<T> implements Serializable {
     private Integer code;
@@ -39,7 +41,7 @@ public class ResponseResult<T> implements Serializable {
      * @param <T>
      * @return
      */
-    public static<T> ResponseResult<T> success(Integer code,String msg,T data){
+    public static<T> ResponseResult<T> success(Integer code, String msg, T data){
         ResponseResult<T> responseResult = new ResponseResult<>();
         responseResult.setCode(code);
         responseResult.setMsg(msg);
@@ -76,7 +78,7 @@ public class ResponseResult<T> implements Serializable {
      * @param <T>
      * @return
      */
-    public static<T> ResponseResult<T> success(String msg,T data){
+    public static<T> ResponseResult<T> success(String msg, T data){
 
         return success(ResultCode.SUCCESS.code(),msg,data);
     }
@@ -88,7 +90,7 @@ public class ResponseResult<T> implements Serializable {
      * @param <T>
      * @return
      */
-    public static<T> ResponseResult<T> fail(Integer code,String msg,T data){
+    public static<T> ResponseResult<T> fail(Integer code, String msg, T data){
         ResponseResult<T> responseResult = new ResponseResult<>();
         responseResult.setCode(code);
         responseResult.setMsg(msg);
@@ -124,7 +126,7 @@ public class ResponseResult<T> implements Serializable {
      * @param <T>
      * @return
      */
-    public static<T> ResponseResult<T> fail(Integer code,String msg){
+    public static<T> ResponseResult<T> fail(Integer code, String msg){
 
         return fail(code,msg,null);
     }
@@ -136,7 +138,7 @@ public class ResponseResult<T> implements Serializable {
      * @param <T>
      * @return
      */
-    public static<T> ResponseResult<T> fail(String msg,T data){
+    public static<T> ResponseResult<T> fail(String msg, T data){
 
         return fail(ResultCode.FAILED.code(),msg,data);
     }

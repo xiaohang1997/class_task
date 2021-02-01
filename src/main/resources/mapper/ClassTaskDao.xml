@@ -4,27 +4,11 @@
 
     <resultMap type="com.example.demo.entity.ClassTask" id="ClassTaskMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-<!--        <result property="majorId" column="major_id" jdbcType="INTEGER"/>-->
-<!--        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>-->
-<!--        <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>-->
-<!--        <result property="classroomId" column="classroom_id" jdbcType="INTEGER"/>-->
+        <result property="majorId" column="major_id" jdbcType="INTEGER"/>
+        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
+        <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
+        <result property="classroomId" column="classroom_id" jdbcType="INTEGER"/>
         <result property="time" column="time" jdbcType="VARCHAR"/>
-        <association property="major"
-                     column="major_id"
-                     select="com.example.demo.dao.MajorDao.queryById">
-        </association>
-        <association property="subject"
-                     column="subject_id"
-                     select="com.example.demo.dao.SubjectDao.queryById">
-        </association>
-        <association property="teacher"
-                     column="teacher_id"
-                     select="com.example.demo.dao.TeacherDao.queryById">
-        </association>
-        <association property="classroom"
-                     column="classroom_id"
-                     select="com.example.demo.dao.ClassroomDao.queryById">
-        </association>
     </resultMap>
 
     <!--查询单个-->
@@ -126,11 +110,18 @@
         where id = #{id}
     </update>
 
-    <!--通过主键删除-->
-    <delete id="deleteById">
+<!--    &lt;!&ndash;通过主键删除&ndash;&gt;-->
+<!--    <delete id="deleteById">-->
+<!--        delete-->
+<!--        from student_task.class_task-->
+<!--        where id = #{id}-->
+<!--    </delete>-->
+
+    <!--通过major_id删除-->
+    <delete id="deleteByMajorId">
         delete
         from student_task.class_task
-        where id = #{id}
+        where major_id = #{majorId}
     </delete>
 
 </mapper>

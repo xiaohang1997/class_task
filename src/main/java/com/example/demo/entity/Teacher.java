@@ -6,16 +6,16 @@ import java.io.Serializable;
  * (Teacher)实体类
  *
  * @author makejava
- * @since 2021-02-01 10:59:04
+ * @since 2021-02-01 15:06:26
  */
 public class Teacher implements Serializable {
-    private static final long serialVersionUID = 510581240360795019L;
+    private static final long serialVersionUID = 242724542609275916L;
 
     private Integer id;
 
     private String name;
 
-    private Subject subject;
+    private Integer subjectId;
 
 
     public Integer getId() {
@@ -34,12 +34,11 @@ public class Teacher implements Serializable {
         this.name = name;
     }
 
-
-    public Subject getSubject() {
-        return subject;
+    public Integer getSubjectId() {
+        return subjectId;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 }
