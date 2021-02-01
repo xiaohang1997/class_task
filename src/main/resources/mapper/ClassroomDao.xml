@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ClassroomDao">
+
+    <resultMap type="com.example.demo.entity.Classroom" id="ClassroomMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="location" column="location" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ClassroomMap">
+        select id,
+               account,
+               location,
+               state
+        from student_task.classroom
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ClassroomMap">
+        select id,
+               account,
+               location,
+               state
+        from student_task.classroom
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="ClassroomMap">
+        select
+        id, account, location, state
+        from student_task.classroom
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="location != null and location != ''">
+                and location = #{location}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into student_task.classroom(account, location, state)
+        values (#{account}, #{location}, #{state})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into student_task.classroom(account, location, state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.account}, #{entity.location}, #{entity.state})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into student_task.classroom(account, location, state)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.account}, #{entity.location}, #{entity.state})
+        </foreach>
+        on duplicate key update
+        account = values(account) , location = values(location) , state = values(state)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update student_task.classroom
+        <set>
+            <if test="account != null and account != ''">
+                account = #{account},
+            </if>
+            <if test="location != null and location != ''">
+                location = #{location},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from student_task.classroom
+        where id = #{id}
+    </delete>
+
+</mapper>
