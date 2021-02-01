@@ -107,4 +107,13 @@
         where id = #{id}
     </delete>
 
+    <update id="updateStateById">
+        update classroom set state = #{state}
+        where id = #{id}
+    </update>
+
+    <update id="clearState">
+        update classroom set state = ''
+    </update>
+
 </mapper>

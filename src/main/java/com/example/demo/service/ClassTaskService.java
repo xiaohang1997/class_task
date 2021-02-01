@@ -44,6 +44,7 @@ public class ClassTaskService {
 
 
     public void createByMajor(Integer majorId){
+        classroomDao.clearState();
         classTaskDao.deleteByMajorId(majorId);
         this.majorId = majorId;
         Random random = new Random();
@@ -140,13 +141,11 @@ public class ClassTaskService {
             //小教室
             case 1:
                 ClassroomVO classroomVO = classroomDao.queryById(classroomId);
-                String state = classroomVO.getState();
-                if (state.isEmpty()){
-                    Classroom classroom = new Classroom();
-                    classroom.setState(time);
-                    classroomDao.update(classroom);
+                if (classroomVO.getState().isEmpty()){
+                    classroomDao.updateStateById(classroomId, time);
                     return 0;
                 }
+                String state = classroomVO.getState();
                 List<String> list = Arrays.asList(state.split(","));       //用,分隔
                 for (String str : list){
                     if (str.equals(time)){
@@ -155,22 +154,18 @@ public class ClassTaskService {
                     }
                 }
                 //未被占用,insert classroom
-                Classroom classroom = new Classroom();
-                classroom.setState(state + "," + time);
-                classroomDao.update(classroom);
+                classroomDao.updateStateById(classroomId, state + "," + time);
                 return 0;
 
             //大教室
             case 0:
                 int i = 0;
                 ClassroomVO classroomVO2 = classroomDao.queryById(classroomId);
-                String state2 = classroomVO2.getState();
-                if (state2.isEmpty()){
-                    Classroom classroom2 = new Classroom();
-                    classroom2.setState(time);
-                    classroomDao.update(classroom2);
+                if (classroomVO2.getState().isEmpty()){
+                    classroomDao.updateStateById(classroomId, time);
                     return 0;
                 }
+                String state2 = classroomVO2.getState();
                 List<String> list2 = Arrays.asList(state2.split(","));       //用,分隔
                 for (String str : list2){
                     if (str.equals(time)){
@@ -181,9 +176,7 @@ public class ClassTaskService {
                     }
                 }
                 //未被占用 insert classroom
-                Classroom classroom2 = new Classroom();
-                classroom2.setState(state2 + "," + time);
-                classroomDao.update(classroom2);
+                classroomDao.updateStateById(classroomId, state2 + "," + time);
                 return 0;
         }
         return 2;

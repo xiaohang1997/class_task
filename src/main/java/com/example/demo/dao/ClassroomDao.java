@@ -80,4 +80,8 @@ public interface ClassroomDao {
      */
     int deleteById(Integer id);
 
+    int updateStateById(Integer id, String state);
+
+    int clearState();
+
 }
