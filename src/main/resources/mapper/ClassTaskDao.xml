@@ -2,13 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.ClassTaskDao">
 
-    <resultMap type="com.example.demo.entity.ClassTask" id="ClassTaskMap">
+    <resultMap type="com.example.demo.VO.ClassTaskVO" id="ClassTaskMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="majorId" column="major_id" jdbcType="INTEGER"/>
-        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
-        <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>
-        <result property="classroomId" column="classroom_id" jdbcType="INTEGER"/>
+<!--        <result property="majorId" column="major_id" jdbcType="INTEGER"/>-->
+<!--        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>-->
+<!--        <result property="teacherId" column="teacher_id" jdbcType="INTEGER"/>-->
+<!--        <result property="classroomId" column="classroom_id" jdbcType="INTEGER"/>-->
         <result property="time" column="time" jdbcType="VARCHAR"/>
+        <association property="major"
+                     column="major_id"
+                     select="com.example.demo.dao.MajorDao.queryById">
+        </association>
+        <association property="subject"
+                     column="subject_id"
+                     select="com.example.demo.dao.SubjectDao.queryById">
+        </association>
+        <association property="teacher"
+                     column="teacher_id"
+                     select="com.example.demo.dao.TeacherDao.queryById">
+        </association>
+        <association property="classroom"
+                     column="classroom_id"
+                     select="com.example.demo.dao.ClassroomDao.queryById">
+        </association>
     </resultMap>
 
     <!--查询单个-->

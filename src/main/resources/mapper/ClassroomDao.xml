@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.ClassroomDao">
 
-    <resultMap type="com.example.demo.entity.Classroom" id="ClassroomMap">
+    <resultMap type="com.example.demo.VO.ClassroomVO" id="ClassroomMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="account" column="account" jdbcType="VARCHAR"/>
         <result property="location" column="location" jdbcType="VARCHAR"/>
@@ -35,7 +35,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ClassroomMap">
         select
-        id, account, location, state
+        id, account, location, state, type
         from student_task.classroom
         <where>
             <if test="id != null">

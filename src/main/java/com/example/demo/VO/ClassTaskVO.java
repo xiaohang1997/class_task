@@ -18,13 +18,13 @@ public class ClassTaskVO implements Serializable {
 
     private Integer id;
 
-    private Major major;
+    private MajorVO major;
 
-    private Subject subject;
+    private SubjectVO subject;
 
-    private Teacher teacher;
+    private TeacherVO teacher;
 
-    private Classroom classroom;
+    private ClassroomVO classroom;
 
     private String time;
 
@@ -36,35 +36,35 @@ public class ClassTaskVO implements Serializable {
         this.id = id;
     }
 
-    public Major getMajor() {
+    public MajorVO getMajor() {
         return major;
     }
 
-    public void setMajor(Major major) {
+    public void setMajor(MajorVO major) {
         this.major = major;
     }
 
-    public Subject getSubject() {
+    public SubjectVO getSubject() {
         return subject;
     }
 
-    public void setSubject(Subject subject) {
+    public void setSubject(SubjectVO subject) {
         this.subject = subject;
     }
 
-    public Teacher getTeacher() {
+    public TeacherVO getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
+    public void setTeacher(TeacherVO teacher) {
         this.teacher = teacher;
     }
 
-    public Classroom getClassroom() {
+    public ClassroomVO getClassroom() {
         return classroom;
     }
 
-    public void setClassroom(Classroom classroom) {
+    public void setClassroom(ClassroomVO classroom) {
         this.classroom = classroom;
     }
 

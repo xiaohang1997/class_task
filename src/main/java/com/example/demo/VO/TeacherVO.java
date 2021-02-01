@@ -15,7 +15,7 @@ public class TeacherVO implements Serializable {
 
     private String name;
 
-    private Integer subjectId;
+    private SubjectVO subject;
 
     private String password;
 
@@ -36,12 +36,12 @@ public class TeacherVO implements Serializable {
         this.name = name;
     }
 
-    public Integer getSubjectId() {
-        return subjectId;
+    public SubjectVO getSubject() {
+        return subject;
     }
 
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
+    public void setSubject(SubjectVO subject) {
+        this.subject = subject;
     }
 
     public String getPassword() {

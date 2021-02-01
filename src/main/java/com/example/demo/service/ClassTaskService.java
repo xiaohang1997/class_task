@@ -41,8 +41,7 @@ public class ClassTaskService {
     private Integer teacherId;
     private Integer classroomId;
     private String time;
-    //学科循环次数
-    private Integer i = 0;
+
 
     public void createByMajor(Integer majorId){
         classTaskDao.deleteByMajorId(majorId);
@@ -58,20 +57,21 @@ public class ClassTaskService {
             TeacherVO teacherVO = this.findTeacherBySubjectId(subjectId);
             this.teacherId = teacherVO.getId();
             for (int i=0; i < subjectTime; i++){
-                this.makeSureClassRoom(subjectType);
+                System.out.println(subjectType);
+                makeSureClassRoom(subjectType);
             }
         }
     }
 
     //输入subjectType(0非专业课，大教室，1专业课，小教室)
     // 摇色子确定classroomId和time,并insert classTask
-    private void makeSureClassRoom(Integer subjectType){
+    public void makeSureClassRoom(Integer subjectType){
         while (true){
             ClassroomVO classroomVO = this.findClassroom(subjectType);
             String time = this.getRandomTime();
             Integer classroomId = classroomVO.getId();
             Integer classroomType = classroomVO.getType();
-            int num = this.checkIfEmpty(time, classroomId, classroomType);
+            Integer num = checkIfEmpty(time, classroomId, classroomType);
             if (num == 0){
                 this.classroomId = classroomId;
                 this.time = time;
@@ -135,12 +135,18 @@ public class ClassTaskService {
 
     //输入时间段如 12, ClassRoom id，教室type(0大1小)判断是否空闲 教室type=科目type
     //0未占用，1已占用，2没进逻辑
-    private int checkIfEmpty(String time, Integer classroomId, Integer type){
+    private Integer checkIfEmpty(String time, Integer classroomId, int type){
         switch (type){
             //小教室
             case 1:
                 ClassroomVO classroomVO = classroomDao.queryById(classroomId);
                 String state = classroomVO.getState();
+                if (state.isEmpty()){
+                    Classroom classroom = new Classroom();
+                    classroom.setState(time);
+                    classroomDao.update(classroom);
+                    return 0;
+                }
                 List<String> list = Arrays.asList(state.split(","));       //用,分隔
                 for (String str : list){
                     if (str.equals(time)){
@@ -159,6 +165,12 @@ public class ClassTaskService {
                 int i = 0;
                 ClassroomVO classroomVO2 = classroomDao.queryById(classroomId);
                 String state2 = classroomVO2.getState();
+                if (state2.isEmpty()){
+                    Classroom classroom2 = new Classroom();
+                    classroom2.setState(time);
+                    classroomDao.update(classroom2);
+                    return 0;
+                }
                 List<String> list2 = Arrays.asList(state2.split(","));       //用,分隔
                 for (String str : list2){
                     if (str.equals(time)){

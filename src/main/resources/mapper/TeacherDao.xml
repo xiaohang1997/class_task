@@ -2,10 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.TeacherDao">
 
-    <resultMap type="com.example.demo.entity.Teacher" id="TeacherMap">
+    <resultMap type="com.example.demo.VO.TeacherVO" id="TeacherMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>
+<!--        <result property="subjectId" column="subject_id" jdbcType="INTEGER"/>-->
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <association property="subject"
+                     column="subject_id"
+                     select="com.example.demo.dao.SubjectDao.queryById">
+        </association>
     </resultMap>
 
     <!--查询单个-->

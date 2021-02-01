@@ -24,6 +24,7 @@ public class ClassTaskController {
     @Resource
     private ClassTaskService classTaskService;
 
+    @RequestMapping("createByMajor")
     public void createByMajor(Integer majorId){
         classTaskService.createByMajor(majorId);
     }

@@ -1,5 +1,7 @@
 package com.example.demo.VO;
 
+import com.example.demo.entity.Major;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,10 +20,9 @@ public class SubjectVO implements Serializable {
 
     private Integer isMajor;
 
-    private Integer majorId;
+    private MajorVO major;
 
     private Integer time;
-
 
     public Integer getId() {
         return id;
@@ -47,12 +48,12 @@ public class SubjectVO implements Serializable {
         this.isMajor = isMajor;
     }
 
-    public Integer getMajorId() {
-        return majorId;
+    public MajorVO getMajor() {
+        return major;
     }
 
-    public void setMajorId(Integer majorId) {
-        this.majorId = majorId;
+    public void setMajor(MajorVO major) {
+        this.major = major;
     }
 
     public Integer getTime() {
