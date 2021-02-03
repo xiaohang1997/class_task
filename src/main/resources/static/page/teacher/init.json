@@ -1,0 +1,29 @@
+{
+  "homeInfo": {
+    "title": "首页",
+    "href": "welcome.html"
+  },
+  "logoInfo": {
+    "title": "教师",
+    "image": "../../images/logo.png",
+    "href": ""
+  },
+  "menuInfo": [
+    {
+      "title": "教师",
+      "icon": "fa fa-address-book",
+      "href": "",
+      "target": "_self",
+      "spread": false,
+      "child": [
+        {
+          "title": "教师课表",
+          "href": "table.html",
+          "icon": "fa fa-window-maximize",
+          "target": "_self",
+          "spread": false
+        }
+      ]
+    }
+  ]
+}

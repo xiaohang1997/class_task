@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <h1>欢迎你，帅气的管理员</h1>
+    <input  id="button" type="button" value="一键排课" onclick="buttonClick();">
+</body>
+<script>
+    function buttonClick(){
+        $.ajax({
+            type: "get",
+            url: "../../classTask/createAll",
+            success: function(data){
+                if(data.code === 200){
+                    alert("排课成功");
+                }
+                else{
+                    alert(data.msg);
+                }
+            }
+        });
+    }
+</script>
+</html>

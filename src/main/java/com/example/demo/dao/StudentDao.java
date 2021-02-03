@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
+import com.example.demo.VO.AdminVO;
 import com.example.demo.VO.StudentVO;
+import com.example.demo.entity.Admin;
 import com.example.demo.entity.Student;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,15 +24,6 @@ public interface StudentDao {
      */
     StudentVO queryById(Integer id);
 
-    /**
-     * 查询指定行数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    List<StudentVO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
-
 
     /**
      * 通过实体作为筛选条件查询
@@ -48,21 +41,7 @@ public interface StudentDao {
      */
     int insert(Student student);
 
-    /**
-     * 批量新增数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<Student> 实例对象列表
-     * @return 影响行数
-     */
-    int insertBatch(@Param("entities") List<Student> entities);
 
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<Student> 实例对象列表
-     * @return 影响行数
-     */
-    int insertOrUpdateBatch(@Param("entities") List<Student> entities);
 
     /**
      * 修改数据
@@ -80,4 +59,7 @@ public interface StudentDao {
      */
     int deleteById(Integer id);
 
+    List<StudentVO> findAll(Student student);
+
+    List<StudentVO> login(Student student);
 }

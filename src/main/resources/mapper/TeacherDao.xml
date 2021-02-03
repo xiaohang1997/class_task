@@ -17,24 +17,18 @@
     <select id="queryById" resultMap="TeacherMap">
         select id,
                name,
-               subject_id
+               subject_id,
+               password
         from student_task.teacher
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="TeacherMap">
-        select id,
-               name,
-               subject_id
-        from student_task.teacher
-        limit #{offset}, #{limit}
-    </select>
+
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="TeacherMap">
         select
-        id, name, subject_id
+        id, name, subject_id, password
         from student_task.teacher
         <where>
             <if test="id != null">
@@ -46,32 +40,18 @@
             <if test="subjectId != null">
                 and subject_id = #{subjectId}
             </if>
+            <if test="password != null">
+                and password = #{password}
+            </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.teacher(name, subject_id)
+        insert into student_task.teacher(name, subject_id, password)
         values (#{name}, #{subjectId})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.teacher(name, subject_id)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name}, #{entity.subjectId})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.teacher(name, subject_id)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name}, #{entity.subjectId})
-        </foreach>
-        on duplicate key update
-        name = values(name) , subject_id = values(subject_id)
-    </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -83,15 +63,41 @@
             <if test="subjectId != null">
                 subject_id = #{subjectId},
             </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
         </set>
         where id = #{id}
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete
+    <update id="deleteById">
+        update classroom set del = 1 where id = #{id}
+    </update>
+
+    <select id="findAll" resultMap="TeacherMap">
+        select
+        id, name, subject_id, password
         from student_task.teacher
-        where id = #{id}
-    </delete>
+        <where>
+            del = 0
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="subjectId != null">
+                and subject_id = #{subjectId}
+            </if>
+            <if test="password != null">
+                and password = #{password}
+            </if>
+        </where>
+    </select>
+
+    <select id="login" resultMap="TeacherMap">
+        select * from teacher where name = #{name} and password = #{password} and del = 0
+    </select>
 
 </mapper>

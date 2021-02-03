@@ -1,6 +1,8 @@
 package com.example.demo.dao;
 
+import com.example.demo.VO.AdminVO;
 import com.example.demo.VO.TeacherVO;
+import com.example.demo.entity.Admin;
 import com.example.demo.entity.Teacher;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,14 +24,6 @@ public interface TeacherDao {
      */
     TeacherVO queryById(Integer id);
 
-    /**
-     * 查询指定行数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    List<TeacherVO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -47,22 +41,7 @@ public interface TeacherDao {
      * @return 影响行数
      */
     int insert(Teacher teacher);
-
-    /**
-     * 批量新增数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<Teacher> 实例对象列表
-     * @return 影响行数
-     */
-    int insertBatch(@Param("entities") List<Teacher> entities);
-
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<Teacher> 实例对象列表
-     * @return 影响行数
-     */
-    int insertOrUpdateBatch(@Param("entities") List<Teacher> entities);
+    
 
     /**
      * 修改数据
@@ -80,4 +59,8 @@ public interface TeacherDao {
      */
     int deleteById(Integer id);
 
+
+    List<TeacherVO> findAll(Teacher teacher);
+
+    List<TeacherVO> login(Teacher teacher);
 }

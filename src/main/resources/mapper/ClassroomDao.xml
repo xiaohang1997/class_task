@@ -21,16 +21,6 @@
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="ClassroomMap">
-        select id,
-               account,
-               location,
-               state,
-               type
-        from student_task.classroom
-        limit #{offset}, #{limit}
-    </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ClassroomMap">
@@ -62,24 +52,6 @@
         values (#{account}, #{location}, #{state}, #{type})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.classroom(account, location, state, type)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.account}, #{entity.location}, #{entity.state}, #{entity.type})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.classroom(account, location, state, type)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.account}, #{entity.location}, #{entity.state}, #{entity.type})
-        </foreach>
-        on duplicate key update
-        account = values(account) , location = values(location) , state = values(state)
-    </insert>
-
     <!--通过主键修改数据-->
     <update id="update">
         update student_task.classroom
@@ -101,11 +73,10 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete
-        from student_task.classroom
-        where id = #{id}
-    </delete>
+
+    <update id="deleteById">
+        update classroom set del = 1 where id = #{id}
+    </update>
 
     <update id="updateStateById">
         update classroom set state = #{state}
@@ -116,4 +87,31 @@
         update classroom set state = ''
     </update>
 
+    <select id="findAll" resultMap="ClassroomMap">
+        select
+        id, account, location, state, type
+        from student_task.classroom
+        <where>
+            del = 0
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="location != null and location != ''">
+                and location = #{location}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByType" resultMap="ClassroomMap" parameterType="Integer">
+        select * from classroom where type = #{type}
+    </select>
 </mapper>

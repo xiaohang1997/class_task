@@ -22,15 +22,6 @@ public interface AdminDao {
      */
     AdminVO queryById(Integer id);
 
-    /**
-     * 查询指定行数据
-     *
-     * @param offset 查询起始位置
-     * @param limit  查询条数
-     * @return 对象列表
-     */
-    List<AdminVO> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
-
 
     /**
      * 通过实体作为筛选条件查询
@@ -54,15 +45,6 @@ public interface AdminDao {
      * @param entities List<Admin> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<Admin> entities);
-
-    /**
-     * 批量新增或按主键更新数据（MyBatis原生foreach方法）
-     *
-     * @param entities List<Admin> 实例对象列表
-     * @return 影响行数
-     */
-    int insertOrUpdateBatch(@Param("entities") List<Admin> entities);
 
     /**
      * 修改数据
@@ -80,4 +62,7 @@ public interface AdminDao {
      */
     int deleteById(Integer id);
 
+    List<AdminVO> findAll(Admin admin);
+
+    List<AdminVO> login(Admin admin);
 }

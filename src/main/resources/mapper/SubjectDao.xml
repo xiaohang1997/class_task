@@ -25,16 +25,6 @@
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="SubjectMap">
-        select id,
-               name,
-               is_major,
-               major_id,
-               time
-        from student_task.subject
-        limit #{offset}, #{limit}
-    </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="SubjectMap">
@@ -66,23 +56,6 @@
         values (#{name}, #{isMajor}, #{majorId}, #{time})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.subject(name, is_major, major_id, time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name}, #{entity.isMajor}, #{entity.majorId}, #{entity.time})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.subject(name, is_major, major_id, time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name}, #{entity.isMajor}, #{entity.majorId}, #{entity.time})
-        </foreach>
-        on duplicate key update
-        name = values(name) , is_major = values(is_major) , major_id = values(major_id) , time = values(time)
-    </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
@@ -105,10 +78,32 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete
+    <update id="deleteById">
+        update classroom set del = 1 where id = #{id}
+    </update>
+
+    <select id="findAll" resultMap="SubjectMap">
+        select
+        id, name, is_major, major_id, time
         from student_task.subject
-        where id = #{id}
-    </delete>
+        <where>
+            del = 0
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="isMajor != null">
+                and is_major = #{isMajor}
+            </if>
+            <if test="majorId != null">
+                and major_id = #{majorId}
+            </if>
+            <if test="time != null">
+                and time = #{time}
+            </if>
+        </where>
+    </select>
 
 </mapper>

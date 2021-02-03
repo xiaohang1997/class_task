@@ -39,18 +39,6 @@
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="ClassTaskMap">
-        select id,
-               major_id,
-               subject_id,
-               teacher_id,
-               classroom_id,
-               time
-        from student_task.class_task
-        limit #{offset}, #{limit}
-    </select>
-
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ClassTaskMap">
         select
@@ -82,25 +70,6 @@
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into student_task.class_task(major_id, subject_id, teacher_id, classroom_id, time)
         values (#{majorId}, #{subjectId}, #{teacherId}, #{classroomId}, #{time})
-    </insert>
-
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.class_task(major_id, subject_id, teacher_id, classroom_id, time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.majorId}, #{entity.subjectId}, #{entity.teacherId}, #{entity.classroomId}, #{entity.time})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.class_task(major_id, subject_id, teacher_id, classroom_id, time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.majorId}, #{entity.subjectId}, #{entity.teacherId}, #{entity.classroomId}, #{entity.time})
-        </foreach>
-        on duplicate key update
-        major_id = values(major_id) , subject_id = values(subject_id) , teacher_id = values(teacher_id) , classroom_id =
-        values(classroom_id) , time = values(time)
     </insert>
 
     <!--通过主键修改数据-->
@@ -140,4 +109,7 @@
         where major_id = #{majorId}
     </delete>
 
+    <delete id="deleteAll">
+        delete from class_task
+    </delete>
 </mapper>

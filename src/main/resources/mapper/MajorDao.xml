@@ -15,13 +15,6 @@
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="MajorMap">
-        select id,
-               name
-        from student_task.major
-        limit #{offset}, #{limit}
-    </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="MajorMap">
@@ -44,24 +37,6 @@
         values (#{name})
     </insert>
 
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.major(name)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.major(name)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name})
-        </foreach>
-        on duplicate key update
-        name = values(name)
-    </insert>
-
     <!--通过主键修改数据-->
     <update id="update">
         update student_task.major
@@ -74,10 +49,24 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete
+    <update id="deleteById">
+        update classroom set del = 1 where id = #{id}
+    </update>
+
+    <select id="findAll" resultMap="MajorMap">
+        select
+        id, name
         from student_task.major
-        where id = #{id}
-    </delete>
+        <where>
+            del = 0
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+
+        </where>
+    </select>
 
 </mapper>

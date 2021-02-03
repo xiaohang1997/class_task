@@ -11,23 +11,17 @@
     <!--查询单个-->
     <select id="queryById" resultMap="AdminMap">
         select id,
-               name
+               name,
+               password
         from student_task.admin
-        where id = #{id}
+        where id = #{id} and del = 0
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="AdminMap">
-        select id,
-               name
-        from student_task.admin
-        limit #{offset}, #{limit}
-    </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="AdminMap">
         select
-        id, name
+        id, name, password
         from student_task.admin
         <where>
             <if test="id != null">
@@ -36,31 +30,18 @@
             <if test="name != null and name != ''">
                 and name = #{name}
             </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
         </where>
     </select>
 
+
+
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.admin(name)
-        values (#{name})
-    </insert>
-
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.admin(name)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into student_task.admin(name)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.name})
-        </foreach>
-        on duplicate key update
-        name = values(name)
+        insert into student_task.admin(name, password)
+        values (#{name},#{password})
     </insert>
 
     <!--通过主键修改数据-->
@@ -70,15 +51,38 @@
             <if test="name != null and name != ''">
                 name = #{name},
             </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
         </set>
         where id = #{id}
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete
+    <update id="deleteById">
+        update classroom set del = 1 where id = #{id}
+    </update>
+
+    <select id="findAll" resultMap="AdminMap">
+        select
+        id, name
         from student_task.admin
-        where id = #{id}
-    </delete>
+        <where>
+            del = 0
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+        </where>
+    </select>
+
+    <select id="login" resultMap="AdminMap">
+        select * from admin where name = #{name} and password = #{password} and del = 0
+    </select>
 
 </mapper>
