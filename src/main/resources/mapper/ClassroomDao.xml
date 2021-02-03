@@ -112,6 +112,6 @@
     </select>
 
     <select id="findByType" resultMap="ClassroomMap" parameterType="Integer">
-        select * from classroom where type = #{type}
+        select * from classroom where type = #{type} and del = 0;
     </select>
 </mapper>

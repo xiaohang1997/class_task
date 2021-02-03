@@ -49,7 +49,7 @@
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         insert into student_task.teacher(name, subject_id, password)
-        values (#{name}, #{subjectId})
+        values (#{name}, #{subjectId}, #{password})
     </insert>
 
 
@@ -72,7 +72,7 @@
 
     <!--通过主键删除-->
     <update id="deleteById">
-        update classroom set del = 1 where id = #{id}
+        update teacher set del = 1 where id = #{id}
     </update>
 
     <select id="findAll" resultMap="TeacherMap">

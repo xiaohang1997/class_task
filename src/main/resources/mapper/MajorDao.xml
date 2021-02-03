@@ -50,7 +50,7 @@
 
     <!--通过主键删除-->
     <update id="deleteById">
-        update classroom set del = 1 where id = #{id}
+        update major set del = 1 where id = #{id}
     </update>
 
     <select id="findAll" resultMap="MajorMap">
